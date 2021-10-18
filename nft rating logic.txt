@@ -19,9 +19,11 @@ Peoples activity, competitions/contests.
 How project works with community/people.
 
 4.Roadmap on project site.
-Finnal goal of a project should NOT be NFT - game, series, performance or something else
+Final goal of a project should NOT be NFT - game, series, performance or something else
 
 5. Rarity snipper - Discoed chat.
 
 6. Open Sea
 Investigate project properties on Open Sea.
+
+7. foundation.app is platform for new NFT projects. Looks like there is no APIs for it. But still it can be used for getting new projects.
