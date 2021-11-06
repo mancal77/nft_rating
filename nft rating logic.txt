@@ -1,12 +1,12 @@
 NFT rating process based on few basic sources - NFT project official sites, NFT community platforms/sites, NFT marketplaces, social media, messaging and digital distribution platform
 
 1. https://rarity.tools/ is a website dedicated to ranking generative art and collectible NFTs by rarity.
-In upcomming tab displayed new projects. These projects has a minimal start-up capital, because publishing on rarity.tools costs 2ETH (somewhere about $6500) 
+In upcoming tab displayed new projects. These projects has a minimal start-up capital, because publishing on rarity.tools costs 2ETH (somewhere about $6500) 
 
 2. Twitter of NFT project
 Good promise projects has large and most important active/dynamic twitter. The things that should be examined:
 a) Project registration date on twitter
-b) Quantity of new twitts
+b) Quantity of new twits
 If project exists on twitter for few months without any significant progress, most of chances that it won't be successful
 c) Additional functionality (except NFT) - stacking, gaming, any other relatively complex functionality.
 This info can be found on project site also (or other platforms - investigation needed)
