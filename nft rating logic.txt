@@ -4,15 +4,15 @@ NFT rating process based on few basic sources - NFT project official sites, NFT 
 In upcomming tab displayed new projects. These projects has a minimal start-up capital, because publishing on rarity.tools costs 2ETH (somewhere about $6500) 
 
 2. Twitter of NFT project
-Good promise projects has large and most important active/dynamic twitter. The things that should be examinated:
+Good promise projects has large and most important active/dynamic twitter. The things that should be examined:
 a) Project registration date on twitter
 b) Quantity of new twitts
-If project exists on twitter for few months without any significant progress, most of chances taht it won't be successful
+If project exists on twitter for few months without any significant progress, most of chances that it won't be successful
 c) Additional functionality (except NFT) - stacking, gaming, any other relatively complex functionality.
 This info can be found on project site also (or other platforms - investigation needed)
 d) Project followers on twitter - if there are other popular NFT projects, the project can be promoted by them.
 e) Twitter pages of other collectors and influencers, should be scanned for mentioning the project.
-List of collectors can be found on SWOPTOKY telegram channel (or anyother source)
+List of collectors can be found on SWOPTOKY telegram channel (or any other source)
 
 3. Project Discord 
 Peoples activity, competitions/contests.
