@@ -1,4 +1,6 @@
+import re
 from time import sleep
+
 from bs4 import BeautifulSoup as bs
 
 from selenium import webdriver
@@ -21,12 +23,16 @@ soup = bs(driver.page_source, 'html.parser')
 projects_full_list = []
 projects = soup.find_all('tr', class_="text-left text-gray-800")
 for project in projects:
+    # TODO project_name and project_description should be concatenated
     project_name = project.find('div', 'text-lg font-bold text-pink-700 dark:text-gray-300')
-    project_description = project.find('div', 'max-width: 600px;')
-    # discord =
-    # twitter =
-    # project_url =
-    projects_full_list.append((project_name, project_description))
+    project_description = project.find_all('div', attrs={'style':'max-width: 600px;'})[1]
+    for idx, a in enumerate(project.find_all('a', href=True)):
+        if idx == 0:
+            discord = a['href']
+        elif idx == 1:
+            twitter = a['href']
+        else:
+            project_url = a['href']
+    projects_full_list.append((discord, twitter, project_url))
 print(projects_full_list)
-# print(soup)
 driver.quit()
