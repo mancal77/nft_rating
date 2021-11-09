@@ -27,3 +27,60 @@ Final goal of a project should NOT be NFT - game, series, performance or somethi
 Investigate project properties on Open Sea.
 
 7. foundation.app is platform for new NFT projects. Looks like there is no APIs for it. But still it can be used for getting new projects.
+
+
+
+
+Twitter APIs:
+https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-users-show
+
+1. 
+GET users/show
+https://api.twitter.com/1.1/users/show.json
+
+Response fields:
+created_at - The UTC datetime that the user account was created on Twitter
+followers_count
+description - Additional functionality (except NFT) - stacking, gaming, any other relatively complex functionality.
+friends_count
+statuses_count - The number of Tweets (including retweets) issued by the user.
+
+
+2. 
+GET followers/list
+https://api.twitter.com/1.1/followers/list.json
+
+Response fields:
+Returns a cursored collection of user objects for users following the specified user.
+
+
+3.
+GET friends/list
+https://api.twitter.com/1.1/friends/list.json
+
+Response fields:
+Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their "friends").
+
+
+4.
+GET users/search
+https://api.twitter.com/1.1/users/search.json
+
+Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
+
+Only the first 1,000 matching results are available.
+
+
+5.
+ search/tweets
+https://api.twitter.com/1.1/search/tweets.json
+
+Returns a collection of relevant Tweets matching a specified query.
+
+
+6.
+GET statuses / user_timeline
+https://api.twitter.com/1.1/statuses/user_timeline.json
+
+Returns a collection of the most recent Tweets posted by the indicated by the screen_name or user_id parameters.
+
