@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+from bigQuery import bigQuery
+
 options = Options()
 options.headless = True
 options.add_argument("--window-size=1920,1200")
@@ -31,3 +33,4 @@ for project in projects:
     projects_full_list.append((project_name, project_description, discord, twitter, project_url))
 print(projects_full_list)
 driver.quit()
+bigQuery.insert_rows(projects_full_list)
