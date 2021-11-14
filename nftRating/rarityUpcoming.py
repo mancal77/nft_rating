@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from bigQuery import insert_rows
+from bigQuery import insert_rows_from_json
 
 options = Options()
 options.headless = True
@@ -41,4 +41,4 @@ for project in projects:
     projects_full_list.append(projects_full)
 print(projects_full_list)
 driver.quit()
-insert_rows(projects_full_list)
+insert_rows_from_json(projects_full_list)

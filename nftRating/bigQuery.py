@@ -25,6 +25,7 @@ def create_table():
         bigquery.SchemaField("project_description", "STRING"),
         bigquery.SchemaField("twitter", "STRING"),
         bigquery.SchemaField("project_url", "STRING"),
+        bigquery.SchemaField("opensea_url", "STRING"),
         bigquery.SchemaField("discord", "STRING"),
         bigquery.SchemaField("project_reg_date", "DATE"),
         bigquery.SchemaField("twitter_reg_date", "DATE"),
@@ -42,8 +43,16 @@ def create_table():
     )
 
 
-def insert_rows(rows_to_insert):
+def insert_rows_from_json(rows_to_insert):
     errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
+    if not errors:
+        print("New rows have been added.")
+    else:
+        print("Encountered errors while inserting rows: {}".format(errors))
+
+
+def insert_rows_from_df(df_to_insert, columns):
+    errors = client.insert_rows_from_dataframe(table_id, df_to_insert, columns, 500)  # Make an API request.
     if not errors:
         print("New rows have been added.")
     else:
