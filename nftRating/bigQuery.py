@@ -1,3 +1,5 @@
+from time import sleep
+
 from google.cloud.exceptions import NotFound
 from google.cloud import bigquery
 
@@ -22,7 +24,7 @@ def create_table():
         bigquery.SchemaField("item_name", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("item_type", "STRING", mode="REQUIRED"),  # 1-project, 2-artwork, 3-collection, 4-creator
         bigquery.SchemaField("item_token", "STRING"),
-        bigquery.SchemaField("project_description", "STRING"),
+        bigquery.SchemaField("description", "STRING"),
         bigquery.SchemaField("twitter", "STRING"),
         bigquery.SchemaField("project_url", "STRING"),
         bigquery.SchemaField("opensea_url", "STRING"),
@@ -67,6 +69,7 @@ except NotFound:
     print("Dataset {} is not found".format(dataset_id))
     print("Creating dataset {}".format(dataset_id))
     create_data_set()
+    sleep(2)
 
 # Check if Table exists and if not create it
 try:

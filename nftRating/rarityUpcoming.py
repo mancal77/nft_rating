@@ -36,9 +36,9 @@ for project in projects:
         else:
             project_url = a['href']
     projects_full.update(
-        {"item_name": project_name, "item_type": 1, "project_description": project_description, "twitter": twitter,
+        {"item_name": project_name, "item_type": 1, "description": project_description, "twitter": twitter,
          "project_url": project_url, "discord": discord})
     projects_full_list.append(projects_full)
-print(projects_full_list)
 driver.quit()
+
 insert_rows_from_json(projects_full_list)
