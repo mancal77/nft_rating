@@ -1,16 +1,8 @@
 import requests
-import os
-from pyspark.sql import SparkSession
-import pandas as pd
-import json
-
 from bigQuery import insert_rows_from_json
 
-spark = SparkSession.builder.getOrCreate()
-tmp_file_path = os.path.join(os.getcwd(), 'tmp.json')
 offset = 0
 batch_size = 50
-read_more = True
 max_offset = 100
 url = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset={offset}&limit={batch_size}"
 
@@ -29,6 +21,7 @@ while len(filtered) < max_offset:
         res = fil['asset_contract']['address']
         del fil['asset_contract']
         fil['item_token'] = res
+        # TODO possible to add check what item_type and add it
         if fil['twitter'] and fil['name']:
             filtered.append(fil)
 
@@ -39,4 +32,5 @@ for i in filtered:
     i['project_url'] = i['permalink']
     del i['permalink']
 
+# TODO - investigate why first run (with create table) fails. Not happens at rarityUpcoming.py run.
 insert_rows_from_json(filtered)
