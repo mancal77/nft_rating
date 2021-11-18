@@ -1,3 +1,5 @@
+import uuid
+
 import requests
 from bigQuery import insert_rows_from_json
 
@@ -31,6 +33,7 @@ for i in filtered:
     del i['name']
     i['project_url'] = i['permalink']
     del i['permalink']
+    i['uuid'] = str(uuid.uuid4())
 
 # TODO - investigate why first run (with create table) fails. Not happens at rarityUpcoming.py run.
 insert_rows_from_json(filtered)

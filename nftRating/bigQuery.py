@@ -21,6 +21,7 @@ def create_data_set():
 
 def create_table():
     schema = [
+        bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("item_name", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("item_type", "STRING", mode="REQUIRED"),  # 1-project, 2-artwork, 3-collection, 4-creator
         bigquery.SchemaField("item_token", "STRING"),

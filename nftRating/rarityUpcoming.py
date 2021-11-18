@@ -1,3 +1,4 @@
+import uuid
 from time import sleep
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
@@ -37,7 +38,7 @@ for project in projects:
             project_url = a['href']
     projects_full.update(
         {"item_name": project_name, "item_type": 1, "description": project_description, "twitter": twitter,
-         "project_url": project_url, "discord": discord})
+         "project_url": project_url, "discord": discord, "uuid": str(uuid.uuid4())})
     projects_full_list.append(projects_full)
 driver.quit()
 
