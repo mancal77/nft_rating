@@ -1,4 +1,5 @@
 import uuid
+from datetime import *
 
 import requests
 from bigQuery import insert_rows_from_json
@@ -16,19 +17,24 @@ while len(filtered) < max_offset:
     response_json = response.json()["assets"]
     for k in response_json:
         fil = {}
+        res = None
         fil = {key: k[key] for key in k.keys() & {'name', 'description', 'permalink', 'collection', 'asset_contract'}}
         res = fil['collection']['twitter_username']
-        del fil['collection']
         fil['twitter'] = res
+        del fil['collection']
         res = fil['asset_contract']['address']
-        del fil['asset_contract']
         fil['item_token'] = res
+        res = fil['asset_contract']['created_date']
+        fil['project_reg_date'] = str(res).split('T')[0]
+        del fil['asset_contract']
         # TODO possible to add check what item_type and add it
         if fil['twitter'] and fil['name']:
+        # TODO - check if it possible to filter out by "created_date". The problem that most of assets sre from 2020.
+        # if fil['twitter'] and fil['name'] and (datetime.now() - datetime.strptime(fil['project_reg_date'], '%Y-%m-%d')).days < 120:
             filtered.append(fil)
 
 for i in filtered:
-    i['item_type'] = 1
+    i['item_type'] = 2
     i['item_name'] = i['name']
     del i['name']
     i['project_url'] = i['permalink']
