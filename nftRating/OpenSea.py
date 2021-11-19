@@ -7,7 +7,7 @@ from bigQuery import insert_rows_from_json
 offset = 0
 batch_size = 50
 max_offset = 100
-url = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset={offset}&limit={batch_size}"
+url = "https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset={offset}&limit={batch_size}"
 
 filtered = []
 
