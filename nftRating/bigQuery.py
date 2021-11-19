@@ -33,7 +33,10 @@ def create_table():
         bigquery.SchemaField("project_reg_date", "DATE"),
         bigquery.SchemaField("twitter_reg_date", "DATE"),
         bigquery.SchemaField("new_twits", "INTEGER"),
-        bigquery.SchemaField("twitter_followers", "INTEGER"),
+        bigquery.SchemaField("twitter_followers_count", "INTEGER"),
+        bigquery.SchemaField("twitter_friends_count", "INTEGER"),
+        bigquery.SchemaField("twitter_favourites_count", "INTEGER"),
+        bigquery.SchemaField("twitter_statuses_count", "INTEGER"),
         bigquery.SchemaField("twitter_popular_followers", "INTEGER"),
         bigquery.SchemaField("twitter_mentions", "INTEGER"),
         bigquery.SchemaField("additional_functionality", "STRING")
@@ -60,6 +63,16 @@ def insert_rows_from_df(df_to_insert, columns):
         print("New rows have been added.")
     else:
         print("Encountered errors while inserting rows: {}".format(errors))
+
+
+def get_twitter_users():
+    query = """
+        SELECT uuid, twitter
+        FROM {}
+    """.format(table_id)
+    query_job = client.query(query)  # Make an API request.
+    rows = query_job.result()
+    return rows
 
 
 # Check if Data Set exists and if not create it

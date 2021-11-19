@@ -1,5 +1,7 @@
 import uuid
 from time import sleep
+
+import catch as catch
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -27,13 +29,16 @@ for project in projects:
     projects_full = {}
     project_name = str(project.find('div', 'text-lg font-bold text-pink-700 dark:text-gray-300')).split('600px;">\n\t\t\t')[1].split(
         '<!--')[0]
-    project_description = str(project.find_all('div', attrs={'style': 'max-width: 600px;'})[1]).split('600px;">\n\t\t\t\t')[1].split(
+    try:
+        project_description = str(project.find_all('div', attrs={'style': 'max-width: 600px;'})[1]).split('600px;">\n\t\t\t\t')[1].split(
         '\n\t\t\t</div')[0]
+    except Exception as ex:
+        print(ex)
     for idx, a in enumerate(project.find_all('a', href=True)):
         if str(a['href']).__contains__('discord'):
             discord = a['href']
         elif str(a['href']).__contains__('twitter'):
-            twitter = a['href']
+            twitter = str(a['href']).split('twitter.com/')[1]
         else:
             project_url = a['href']
     projects_full.update(
