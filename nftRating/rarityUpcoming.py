@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from bigQuery import insert_rows_from_json
+from bigQuery import *
 
 options = Options()
 options.headless = True
@@ -33,6 +33,7 @@ for project in projects:
         project_description = str(project.find_all('div', attrs={'style': 'max-width: 600px;'})[1]).split('600px;">\n\t\t\t\t')[1].split(
         '\n\t\t\t</div')[0]
     except Exception as ex:
+        project_description = ''
         print(ex)
     for idx, a in enumerate(project.find_all('a', href=True)):
         if str(a['href']).__contains__('discord'):
@@ -47,4 +48,4 @@ for project in projects:
     projects_full_list.append(projects_full)
 driver.quit()
 
-insert_rows_from_json(projects_full_list)
+insert_rows_from_json(raw_data_table_id, projects_full_list)

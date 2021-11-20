@@ -2,7 +2,7 @@ import uuid
 from datetime import *
 
 import requests
-from bigQuery import insert_rows_from_json
+from bigQuery import *
 
 offset = 0
 batch_size = 50
@@ -42,4 +42,4 @@ for i in filtered:
     i['uuid'] = str(uuid.uuid4())
 
 # TODO - investigate why first run (with create table) fails. Not happens at rarityUpcoming.py run.
-insert_rows_from_json(filtered)
+insert_rows_from_json(raw_data_table_id, filtered)

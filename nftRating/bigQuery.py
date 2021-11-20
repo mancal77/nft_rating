@@ -6,7 +6,8 @@ from google.cloud import bigquery
 client = bigquery.Client()
 client.project = 'disco-ascent-328216'
 dataset_id = "{}.nft_rating".format(client.project)
-table_id = '{}.nft_raw_data'.format(dataset_id)
+raw_data_table_id = '{}.nft_raw_data'.format(dataset_id)
+twitter_statuses_table_id = '{}.twitter_statuses'.format(dataset_id)
 
 
 def create_data_set():
@@ -19,7 +20,7 @@ def create_data_set():
     print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
 
 
-def create_table():
+def create_raw_data_table():
     schema = [
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("item_name", "STRING", mode="REQUIRED"),
@@ -31,6 +32,7 @@ def create_table():
         bigquery.SchemaField("opensea_url", "STRING"),
         bigquery.SchemaField("discord", "STRING"),
         bigquery.SchemaField("project_reg_date", "DATE"),
+        bigquery.SchemaField("twitter_user_id", "INTEGER"),
         bigquery.SchemaField("twitter_reg_date", "DATE"),
         bigquery.SchemaField("new_twits", "INTEGER"),
         bigquery.SchemaField("twitter_followers_count", "INTEGER"),
@@ -42,15 +44,29 @@ def create_table():
         bigquery.SchemaField("additional_functionality", "STRING")
     ]
 
-    table = bigquery.Table(table_id, schema=schema)
+    table = bigquery.Table(raw_data_table_id, schema=schema)
     table = client.create_table(table)  # Make an API request.
     print(
         "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
     )
 
 
-def insert_rows_from_json(rows_to_insert):
-    errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
+def create_twitter_statuses_table():
+    schema = [
+        bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("twitter_status", "STRING", mode="REQUIRED"),
+    ]
+
+    table = bigquery.Table(twitter_statuses_table_id, schema=schema)
+    table = client.create_table(table)  # Make an API request.
+    print(
+        "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
+    )
+
+
+def insert_rows_from_json(table, rows_to_insert):
+    errors = client.insert_rows_json(table, rows_to_insert)  # Make an API request.
     if not errors:
         print("New rows have been added.")
     else:
@@ -58,7 +74,7 @@ def insert_rows_from_json(rows_to_insert):
 
 
 def insert_rows_from_df(df_to_insert, columns):
-    errors = client.insert_rows_from_dataframe(table_id, df_to_insert, columns, 500)  # Make an API request.
+    errors = client.insert_rows_from_dataframe(raw_data_table_id, df_to_insert, columns, 500)  # Make an API request.
     if not errors:
         print("New rows have been added.")
     else:
@@ -69,7 +85,17 @@ def get_twitter_users():
     query = """
         SELECT uuid, twitter
         FROM {}
-    """.format(table_id)
+    """.format(raw_data_table_id)
+    query_job = client.query(query)  # Make an API request.
+    rows = query_job.result()
+    return rows
+
+
+def get_twitter_users_id():
+    query = """
+        SELECT uuid, twitter_user_id
+        FROM {}
+    """.format(raw_data_table_id)
     query_job = client.query(query)  # Make an API request.
     rows = query_job.result()
     return rows
@@ -83,13 +109,21 @@ except NotFound:
     print("Dataset {} is not found".format(dataset_id))
     print("Creating dataset {}".format(dataset_id))
     create_data_set()
-    sleep(2)
 
-# Check if Table exists and if not create it
+# Check if raw_data_table exists and if not create it
 try:
-    client.get_table(table_id)  # Make an API request.
-    print("Table {} already exists.".format(table_id))
+    client.get_table(raw_data_table_id)  # Make an API request.
+    print("Table {} already exists.".format(raw_data_table_id))
 except NotFound:
-    print("Table {} is not found.".format(table_id))
-    print("Creating table {}".format(table_id))
-    create_table()
+    print("Table {} is not found.".format(raw_data_table_id))
+    print("Creating table {}".format(raw_data_table_id))
+    create_raw_data_table()
+
+# Check if twitter_statuses_table exists and if not create it
+try:
+    client.get_table(twitter_statuses_table_id)  # Make an API request.
+    print("Table {} already exists.".format(raw_data_table_id))
+except NotFound:
+    print("Table {} is not found.".format(raw_data_table_id))
+    print("Creating table {}".format(raw_data_table_id))
+    create_twitter_statuses_table()
