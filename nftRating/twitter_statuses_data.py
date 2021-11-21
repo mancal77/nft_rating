@@ -1,5 +1,3 @@
-from time import strftime, strptime
-
 import bigQuery
 from bigQuery import *
 from twython import Twython

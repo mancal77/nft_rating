@@ -8,6 +8,7 @@ client.project = 'disco-ascent-328216'
 dataset_id = "{}.nft_rating".format(client.project)
 raw_data_table_id = '{}.nft_raw_data'.format(dataset_id)
 twitter_statuses_table_id = '{}.twitter_statuses'.format(dataset_id)
+twits_table_id = '{}.twits'.format(dataset_id)
 
 
 def create_data_set():
@@ -65,6 +66,20 @@ def create_twitter_statuses_table():
     )
 
 
+def create_twits_table():
+    schema = [
+        bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("twit_text", "STRING", mode="REQUIRED"),
+    ]
+
+    table = bigquery.Table(twits_table_id, schema=schema)
+    table = client.create_table(table)  # Make an API request.
+    print(
+        "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
+    )
+
+
 def insert_rows_from_json(table, rows_to_insert):
     errors = client.insert_rows_json(table, rows_to_insert)  # Make an API request.
     if not errors:
@@ -93,7 +108,7 @@ def get_twitter_users():
 
 def get_twitter_users_id():
     query = """
-        SELECT uuid, twitter_user_id
+        SELECT uuid, twitter_user_id, twitter
         FROM {}
     """.format(raw_data_table_id)
     query_job = client.query(query)  # Make an API request.
@@ -122,8 +137,17 @@ except NotFound:
 # Check if twitter_statuses_table exists and if not create it
 try:
     client.get_table(twitter_statuses_table_id)  # Make an API request.
-    print("Table {} already exists.".format(raw_data_table_id))
+    print("Table {} already exists.".format(twitter_statuses_table_id))
 except NotFound:
-    print("Table {} is not found.".format(raw_data_table_id))
-    print("Creating table {}".format(raw_data_table_id))
+    print("Table {} is not found.".format(twitter_statuses_table_id))
+    print("Creating table {}".format(twitter_statuses_table_id))
     create_twitter_statuses_table()
+
+# Check if twits_table exists and if not create it
+try:
+    client.get_table(twits_table_id)  # Make an API request.
+    print("Table {} already exists.".format(twits_table_id))
+except NotFound:
+    print("Table {} is not found.".format(twits_table_id))
+    print("Creating table {}".format(twits_table_id))
+    create_twits_table()
