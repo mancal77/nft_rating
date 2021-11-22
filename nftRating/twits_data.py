@@ -8,7 +8,7 @@ t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
 
 twits_full_list = []
 users_lst = get_twitter_users_id()
-users_count = bigQuery.client.get_table(raw_data_table_id).num_rows
+users_count = get_rows_count(raw_data_table_id)
 i = 0
 for row in users_lst:
     i += 1

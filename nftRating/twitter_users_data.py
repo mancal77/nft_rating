@@ -9,8 +9,9 @@ t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
             )
 
 twitter_users_data_list = []
+twitter_data_list = []
 users_lst = get_twitter_users()
-users_count = bigQuery.client.get_table(raw_data_table_id).num_rows
+users_count = get_rows_count(raw_data_table_id)
 i = 0
 for row in users_lst:
     i += 1
@@ -33,25 +34,28 @@ for row in users_lst:
         print(ex)
         twitter_users_data['twitter_reg_date'] = '0001-01-01'
 
-    # twitter_data_list.append(twitter_data)
+    twitter_data_list.append(twitter_users_data)
     # bigQuery.client.update_table()
-    # insert_rows_from_json(twitter_data_list)
+    print("Get data for {} user from {}.".format(i, users_count))
+
+insert_rows_from_json(twitter_users_data_table_id, twitter_data_list)
 
     # TODO - Find other way to update existing rows, because update each row separately takes to long.
     #  Possible solution - to delete all rows and to insert_rows_from_json.
-    query = """
-    UPDATE {}
-    SET twitter_user_id = {}
-    , twitter_followers_count = {}
-    , twitter_friends_count = {}
-    , twitter_favourites_count = {}
-    , twitter_statuses_count = {}
-    , twitter_reg_date = '{}'
-    WHERE uuid = '{}'
-    """.format(bigQuery.raw_data_table_id, twitter_users_data['twitter_user_id'],
-               twitter_users_data['twitter_followers_count'], twitter_users_data['twitter_friends_count'],
-               twitter_users_data['twitter_favourites_count'],
-               twitter_users_data['twitter_statuses_count'], twitter_users_data['twitter_reg_date'], str(row.uuid))
-    query_job = client.query(query)
-    query_job.result()
-    print("DML query modified {} row from {}.".format(i, users_count))
+    # query = """
+    # UPDATE {}
+    # SET twitter_user_id = {}
+    # , twitter_followers_count = {}
+    # , twitter_friends_count = {}
+    # , twitter_favourites_count = {}
+    # , twitter_statuses_count = {}
+    # , twitter_reg_date = '{}'
+    # WHERE uuid = '{}'
+    # """.format(bigQuery.raw_data_table_id, twitter_users_data['twitter_user_id'],
+    #            twitter_users_data['twitter_followers_count'], twitter_users_data['twitter_friends_count'],
+    #            twitter_users_data['twitter_favourites_count'],
+    #            twitter_users_data['twitter_statuses_count'], twitter_users_data['twitter_reg_date'], str(row.uuid))
+    # # print(bigQuery.client.get_table(raw_data_table_id).streaming_buffer.oldest_entry_time)
+    # query_job = client.query(query)
+    # query_job.result()
+    # print("DML query modified {} row from {}.".format(i, users_count))users_count
