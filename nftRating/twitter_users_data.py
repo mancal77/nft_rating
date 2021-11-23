@@ -21,6 +21,7 @@ for row in users_lst:
         user_data = (t.show_user(screen_name=str(row.twitter)))
     except Exception as ex:
         print(ex)
+        continue
     twitter_users_data['uuid'] = str(row.uuid)
     twitter_users_data['twitter_user_id'] = user_data['id']
     twitter_users_data['twitter_followers_count'] = user_data['followers_count']

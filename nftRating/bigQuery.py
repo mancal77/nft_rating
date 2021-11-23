@@ -71,7 +71,7 @@ def create_twitter_statuses_table():
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_status", "STRING", mode="REQUIRED"),
-        bigquery.SchemaField("status_sentiment", "DECIMAL"),
+        bigquery.SchemaField("status_sentiment", "BIGDECIMAL"),
     ]
 
     table = bigquery.Table(twitter_statuses_table_id, schema=schema)
@@ -86,7 +86,7 @@ def create_twits_table():
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twit_text", "STRING", mode="REQUIRED"),
-        bigquery.SchemaField("twit_sentiment", "DECIMAL"),
+        bigquery.SchemaField("twit_sentiment", "BIGDECIMAL"),
     ]
 
     table = bigquery.Table(twits_table_id, schema=schema)
