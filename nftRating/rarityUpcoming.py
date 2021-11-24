@@ -1,7 +1,6 @@
 import uuid
 from time import sleep
 
-import catch as catch
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options

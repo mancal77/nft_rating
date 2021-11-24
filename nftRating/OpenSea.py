@@ -1,5 +1,4 @@
 import uuid
-from datetime import *
 
 import requests
 from bigQuery import *

@@ -1,5 +1,3 @@
-from time import sleep
-
 from google.cloud.exceptions import NotFound
 from google.cloud import bigquery
 

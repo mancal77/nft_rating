@@ -1,4 +1,3 @@
-import bigQuery
 from bigQuery import *
 from twython import Twython
 from sentiment import *
