@@ -11,6 +11,10 @@ twits_table_id = '{}.twits'.format(dataset_id)
 
 
 def create_data_set():
+    """
+    Checks if dataset exists and creates it if not
+    :return: Nothing
+    """
     # Construct a full Dataset object to send to the API.
     dataset = bigquery.Dataset(dataset_id)
     # Geographic location where the dataset should reside.
@@ -21,6 +25,11 @@ def create_data_set():
 
 
 def create_raw_data_table():
+    """
+    Checks if raw_data table exists and creates it if not.
+    Contains table schema.
+    :return: Nothing
+    """
     schema = [
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("item_name", "STRING", mode="REQUIRED"),
@@ -47,6 +56,11 @@ def create_raw_data_table():
 
 
 def create_twitter_users_data_table():
+    """
+    Checks if twitter_users_data table exists and creates it if not.
+    Contains table schema.
+    :return: Nothing
+    """
     schema = [
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
@@ -65,6 +79,11 @@ def create_twitter_users_data_table():
 
 
 def create_twitter_statuses_table():
+    """
+    Checks if twitter_statuses table exists and creates it if not.
+    Contains table schema.
+    :return:
+    """
     schema = [
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
@@ -80,6 +99,11 @@ def create_twitter_statuses_table():
 
 
 def create_twits_table():
+    """
+    Checks if twits table exists and creates it if not.
+    Contains table schema.
+    :return:
+    """
     schema = [
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
@@ -95,6 +119,12 @@ def create_twits_table():
 
 
 def insert_rows_from_json(table, rows_to_insert):
+    """
+    Inserts rows into table. Uses streaming insert.
+    :param table: table name that rows should be inserted into
+    :param rows_to_insert: JSON file with rows that should be inserted
+    :return: Nothing
+    """
     errors = client.insert_rows_json(table, rows_to_insert)  # Make an API request.
     if not errors:
         print("New rows have been added.")
@@ -102,15 +132,11 @@ def insert_rows_from_json(table, rows_to_insert):
         print("Encountered errors while inserting rows: {}".format(errors))
 
 
-def insert_rows_from_df(df_to_insert, columns):
-    errors = client.insert_rows_from_dataframe(raw_data_table_id, df_to_insert, columns, 500)  # Make an API request.
-    if not errors:
-        print("New rows have been added.")
-    else:
-        print("Encountered errors while inserting rows: {}".format(errors))
-
-
 def get_twitter_users():
+    """
+    Get rows from raw_data table.
+    :return: List of uuid and twitter columns values from raw_data table.
+    """
     query = """
         SELECT uuid, twitter
         FROM {}
@@ -121,6 +147,11 @@ def get_twitter_users():
 
 
 def get_twitter_users_id():
+    """
+    Get rows from raw_data and twitter_users tables.
+    JOIN two table by uuid column.
+    :return: List of uuid and twitter columns values from raw_data table and twitter_user_id from twitter_users table.
+    """
     query = """
         SELECT nrd.uuid, tud.twitter_user_id, nrd.twitter
         FROM {}  AS nrd
@@ -134,6 +165,11 @@ def get_twitter_users_id():
 
 
 def get_rows_count(table):
+    """
+    Get count of rows from specific table
+    :param table: Table to count rows.
+    :return: Rows quantity
+    """
     query = """SELECT COUNT(*) AS count FROM {}""".format(table)
     query_job = client.query(query)  # Make an API request.
     rows = query_job.result()
@@ -141,7 +177,9 @@ def get_rows_count(table):
         return row.count
 
 
-# Check if Data Set exists and if not create it
+"""
+Check if Data Set exists and if not create it
+"""
 try:
     client.get_dataset(dataset_id)  # Make an API request.
     print("Dataset {} already exists".format(dataset_id))
@@ -150,7 +188,9 @@ except NotFound:
     print("Creating dataset {}".format(dataset_id))
     create_data_set()
 
-# Check if raw_data_table exists and if not create it
+"""
+Check if raw_data_table exists and if not create it
+"""
 try:
     client.get_table(raw_data_table_id)  # Make an API request.
     print("Table {} already exists.".format(raw_data_table_id))
@@ -159,7 +199,9 @@ except NotFound:
     print("Creating table {}".format(raw_data_table_id))
     create_raw_data_table()
 
-# Check if twitter_users_data table exists and if not create it
+"""
+Check if twitter_users_data table exists and if not create it
+"""
 try:
     client.get_table(twitter_users_data_table_id)  # Make an API request.
     print("Table {} already exists.".format(twitter_users_data_table_id))
@@ -168,7 +210,9 @@ except NotFound:
     print("Creating table {}".format(twitter_users_data_table_id))
     create_twitter_users_data_table()
 
-# Check if twitter_statuses_table exists and if not create it
+"""
+Check if twitter_statuses_table exists and if not create it
+"""
 try:
     client.get_table(twitter_statuses_table_id)  # Make an API request.
     print("Table {} already exists.".format(twitter_statuses_table_id))
@@ -177,7 +221,9 @@ except NotFound:
     print("Creating table {}".format(twitter_statuses_table_id))
     create_twitter_statuses_table()
 
-# Check if twits_table exists and if not create it
+"""
+Check if twits_table exists and if not create it
+"""
 try:
     client.get_table(twits_table_id)  # Make an API request.
     print("Table {} already exists.".format(twits_table_id))
