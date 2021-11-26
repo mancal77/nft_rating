@@ -3,12 +3,18 @@ from time import strftime, strptime
 from bigQuery import *
 from twython import Twython
 
+# Twitter developer API credentials
 t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
             app_secret='yDjfZ39VLTjWrOVmrbZcu0N5L85vzOZPg6fuyJbMnctfKF997V',
             )
 
 
 def get_days_from_date(date):
+    """
+    Function to get days from specific date till today
+    :param date: from what date to calculate days
+    :return: days as integer
+    """
     f_date = datetime.datetime.strptime(date, "%Y-%m-%d")
     l_date = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
     delta = l_date - f_date
@@ -17,9 +23,13 @@ def get_days_from_date(date):
 
 twitter_users_data_list = []
 twitter_data_list = []
+
+# Get all twitter users from BigQuery
 users_lst = get_twitter_users()
 users_count = get_rows_count(raw_data_table_id)
 i = 0
+
+# Get user data from twitter, parse and filter it and get specific keys
 for row in users_lst:
     i += 1
     twitter_users_data = {}
@@ -46,4 +56,5 @@ for row in users_lst:
     # bigQuery.client.update_table()
     print("Get data for {} user from {}.".format(i, users_count))
 
+# Insert rows into twitter_users_data table in BigQuery
 insert_rows_from_json(twitter_users_data_table_id, twitter_data_list)

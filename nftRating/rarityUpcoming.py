@@ -5,18 +5,23 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bigQuery import *
 
+# Selenium - browser options
 options = Options()
 options.headless = True
 options.add_argument("--window-size=1920,1200")
 
+# Chromedriver
 DRIVER_PATH = './chromedriver'
 driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
+
+# Get page from specific URL
 driver.get("https://rarity.tools/upcoming")
 
 # Sleep needed to wait till page loaded
 sleep(5)
 soup = bs(driver.page_source, 'html.parser')
 
+# Get HTML of the page, parsing it and getting the needed data
 projects_full_list = []
 twitter = None
 project_url = None
@@ -45,4 +50,5 @@ for project in projects:
     projects_full_list.append(projects_full)
 driver.quit()
 
+# Insert rows into raw_data table in BigQuery
 insert_rows_from_json(raw_data_table_id, projects_full_list)

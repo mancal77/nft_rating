@@ -2,6 +2,7 @@ import uuid
 import requests
 from bigQuery import *
 
+# Setting for API request
 offset = 0
 batch_size = 50
 max_offset = 100
@@ -9,6 +10,7 @@ url = "https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=d
 
 filtered = []
 
+# Get data from API, parsing it and getting specific keys
 while len(filtered) < max_offset:
     print(url.format(offset=offset, batch_size=batch_size))
     response = requests.request("GET", url.format(offset=offset, batch_size=batch_size))
@@ -40,4 +42,5 @@ for i in filtered:
     i['uuid'] = str(uuid.uuid4())
 
 # TODO - investigate why first run (with create table) fails. Not happens at rarityUpcoming.py run.
+# Insert rows into raw_data table in BigQuery
 insert_rows_from_json(raw_data_table_id, filtered)
