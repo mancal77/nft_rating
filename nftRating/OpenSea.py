@@ -1,5 +1,4 @@
 import uuid
-
 import requests
 from bigQuery import *
 

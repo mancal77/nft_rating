@@ -69,6 +69,7 @@ def create_twitter_users_data_table():
         bigquery.SchemaField("twitter_favourites_count", "INTEGER"),
         bigquery.SchemaField("twitter_statuses_count", "INTEGER"),
         bigquery.SchemaField("twitter_reg_date", "DATE"),
+        bigquery.SchemaField("days_from_reg", "INTEGER"),
     ]
 
     table = bigquery.Table(twitter_users_data_table_id, schema=schema)
