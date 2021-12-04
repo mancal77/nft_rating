@@ -1,6 +1,7 @@
 from google.cloud.exceptions import NotFound
 from google.cloud import bigquery
 
+
 client = bigquery.Client()
 client.project = 'disco-ascent-328216'
 dataset_id = "{}.nft_rating".format(client.project)
