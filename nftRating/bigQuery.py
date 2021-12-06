@@ -110,6 +110,7 @@ def create_twits_table():
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twit_text", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("twit_creation_date", "DATE"),
         bigquery.SchemaField("twit_sentiment", "BIGDECIMAL"),
     ]
 

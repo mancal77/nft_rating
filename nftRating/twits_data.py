@@ -1,6 +1,7 @@
 from bigQuery import *
 from twython import Twython
 from sentiment import *
+from time import strftime, strptime
 
 # Twitter developer API credentials
 t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
@@ -34,8 +35,14 @@ for row in users_lst:
         except Exception as ex:
             print(ex)
             twit_sentiment = 0
+        try:
+            twit_creation_date = strftime('%Y-%m-%d', strptime(twit_payload['created_at'], '%a %b %d %H:%M:%S +0000 %Y'))
+        except Exception as ex:
+            print(ex)
+            twit_creation_date = '0001-01-01'
+
         twit_full.update({"uuid": row.uuid, "twitter_user_id": row.twitter_user_id, "twit_text": twit,
-                          "twit_sentiment": twit_sentiment})
+                          "twit_creation_date": twit_creation_date, "twit_sentiment": twit_sentiment})
         twits_full_list.append(twit_full)
     print("{} user processed from {}.".format(i, users_count))
 
