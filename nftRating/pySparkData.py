@@ -1,6 +1,8 @@
 from datetime import date
-
-from pyspark.sql import SparkSession
+import google.cloud
+from pyspark.sql.functions import col
+from pyspark.sql.types import IntegerType, DecimalType, LongType
+from pyspark.sql import SparkSession, functions
 from bigQuery import *
 
 
@@ -22,13 +24,14 @@ raw_data = spark.read.format('bigquery') \
     .option('table', raw_data_table_id) \
     .load()
 raw_data.createOrReplaceTempView('raw_data')
-raw_data.select('uuid').show()
 
 # Load twits from BigQuery.
 twits_data = spark.read.format('bigquery') \
-    .option('table', twits_table_id) \
-    .load()
+    .load(twits_table_id)
 twits_data.createOrReplaceTempView('twits_data')
+# print(twits_data.twit_sentiment.dtypes)
+# twits_data = twits_data.withColumn("twit_sentiment", twits_data.twit_sentiment.cast(LongType()))
+# twits_data.withColumn(col=("twit_sentiment").cast('int').alias("twit_sentiment"))
 twits_data.show()
 
 # Load statuses from BigQuery.
@@ -40,7 +43,7 @@ statuses_data.createOrReplaceTempView('statuses_data')
 
 # Load user_data from BigQuery.
 user_data = spark.read.format('bigquery') \
-    .option('table', raw_data_table_id) \
+    .option('table', twitter_users_data_table_id) \
     .load()
 user_data.createOrReplaceTempView('user_data')
 
@@ -56,11 +59,11 @@ def query1(uuid):
                 user_data.twitter_followers_count,
                 user_data.twitter_statuses_count,
                 user_data.uuid,
-                avg(twits_data.twit_sentiment) as avg_sentiment,
-                count(twits_data.*) as total_twits
+                avg(twits_data.twit_sentiment) as avg_twits_sentiment,
+                count(twits_data) as total_twits
             FROM user_data
             JOIN twits_data on user_data.uuid=twits_data.uuid
-            WHERE user_data.uuid == {uuid}
+            WHERE user_data.uuid = \"{uuid}\"
             group by 1,2,3,4
             """
 
@@ -74,12 +77,21 @@ def query2(uuid):
                 AND twits.data.uuid = {uuid}
                 """
 
+
 # Loop on projects view to calculate rating and to send data to MySQL
 for row in raw_data.collect():
     row['uuid']
-    a = spark.sql(query1(row['uuid']))
+    twitter_reg_date = user_data.where(col('uuid') == row['uuid']).select('twitter_reg_date')
+    followers = user_data.where(col('uuid') == row['uuid']).select('twitter_followers_count')
+    statuses_since_reg = user_data.where(col('uuid') == row['uuid']).agg(functions.sum(col('twitter_statuses_count')))
+    # avg_twits_sentiment = twits_data.where(col('uuid') == row['uuid']).agg(functions.avg(col('twit_sentiment').cast('long')))
+    total_tweets = twits_data.where(col('uuid') == row['uuid']).agg(functions.count(col('uuid')))
+
+    a = twits_data.where(col('uuid') == row['uuid']) & ((date.today() - col('twit_creation_date')).days < 7)
     a.show()
-    print(a)
+    total_7day_tweets = twits_data.where(col('uuid') == row['uuid']) & ((date.today() - col('twit_creation_date')).days < 7).agg(functions.count(col('uuid')))
+
+    total_7day_tweets.show()
 
     # twits_7count = twits_data.groupby(row['uuid']).count('uuid').filter((date.today() - twits_data.select('twit_creation_date')).days < 7)
     # print(twits_7count)

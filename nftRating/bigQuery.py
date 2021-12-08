@@ -90,6 +90,7 @@ def create_twitter_statuses_table():
         bigquery.SchemaField("uuid", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_user_id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("twitter_status", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("status_creation_date", "DATE"),
         bigquery.SchemaField("status_sentiment", "BIGDECIMAL"),
     ]
 

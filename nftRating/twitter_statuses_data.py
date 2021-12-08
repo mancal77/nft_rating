@@ -1,3 +1,5 @@
+from time import strftime, strptime
+
 from bigQuery import *
 from twython import Twython
 from sentiment import *
@@ -31,12 +33,17 @@ for row in users_lst:
         status_full = {}
         status = status_payload['text']
         try:
+            status_creation_date = strftime('%Y-%m-%d', strptime(status_payload['created_at'], '%a %b %d %H:%M:%S +0000 %Y'))
+        except Exception as ex:
+            print(ex)
+            twit_creation_date = '0001-01-01'
+        try:
             status_sentiment = analyze_sentiment(status_payload['text'])
         except Exception as ex:
             print(ex)
             status_sentiment = 0
         status_full.update({"uuid": row.uuid, "twitter_user_id": row.twitter_user_id, "twitter_status": status,
-                            "status_sentiment": status_sentiment})
+                            "status_creation_date": status_creation_date, "status_sentiment": status_sentiment})
         statuses_full_list.append(status_full)
     print("{} user processed from {}.".format(i, users_count))
 
