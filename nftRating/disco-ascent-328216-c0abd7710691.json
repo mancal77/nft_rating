@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "disco-ascent-328216",
+  "private_key_id": "c0abd7710691366b426847dd59d466e68d7818af",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCuMLUzI7e95FU2\n+0Qa+IaNPVGfd/yPHJbnCAbUiUXZuLnEJaK2TVe7qDe/IMEX2yRSZL5nKvLdi3/J\nKQDKM4yyoXVKokJAR1kY4ORlbXQ2OpLQbqa9+X6TTq9WqrnmNNV1a6m24hZEgV2M\nfAloJ2loszZLVANwYNmptC6Pz5deGM0UpY1qV+CYqaz+sVzNIhDnLqGtXLt0et8V\nMxH77x2dw1h8Ooul8wGTYUUbACMXUdzj0ISJvL/L6qFVSaSNXr7OyF5KyE+8b0Ly\ne9e9IzZHkHgxEe9PleZ3lXOtwlzjgcizooH9DFlbfI3kUnIJXo+vhrNFNW9SzPVG\nrJd81zE3AgMBAAECggEARrF64InW6MixstIv1jhVtx2TMkKKa/Rg49t0li4t/IoF\nTm8txYnHGOBQ248p/ooQCCZdxdX+4d3bGyM6cFWSfO6dARCwDZFHPhsLZoSQ3O9R\npSi7IC+Q6KzO6T/5mU2I8hIjOxcvjVbpRfoTAUO5emX9G345tRKBU+fN28yWtHd1\n3EHPp9kCBsNqZb9CGhfvk7bvqwo/aabo2Hlxm452BkQDS3fK5BKa9DALKcGKtVpf\nWsS++zXLALdv6dN1HwUC7+h1bFuVGefX2oTxUjZyCpU2TAAWgYyTdUSfUlt+WdDT\nmAkalakwL1Dw80/drtzeZDkOoKK1o+40DY4Fjsr3CQKBgQDV+nqVdl6b54djrDPU\n4WDOLeRzmrAmZuiN3ARM9V6J4Xtp3tMf14xTxbmPxG2mU3ZDv9Xs3M0z7HHOUkQf\nQtX3oK6EoFi4YUsw/KkXgFJu+SA0vtB3yIzLGE0djdG+KMkouNbGPHfSk+b4tv2y\nt4raRfIb1xQE9y6PaC4ObjJsnwKBgQDQZeyebzv3OkQkA6kPsS1Rh8Tp8V9hf3N2\n5/5K7tarjN44c/VCwc/JwFzxbIeT6z9ILwDYp3JlTjyUknayQltKdyLe10iLC7nR\nUzsNqz19dWXf3UgZM5YaW7c6xo85F3JG5G9lKKIPh/UPT4VLs83G96yd654Zcvcx\ndW1tCTDcaQKBgHldBvgM2h5NFIJY4lEEv7ZRWziibPRq+82yE5JevQ8xH6Ftq4ts\n4v+Ervm27IYg4nwMq1Yb6htgKTBfgpnEe71mmnVIyOlS7aXMOE/HDXo5vKWN8Ilv\n60Mp9lsj2+miEm4RYGexVjjOgHtitsQNzCh+8ZIOzCEA3Zyi9zRiFiF7AoGAGcdx\n9MtXxKZthXL6d9l3/Kzp2/Ki1OG6O8xI9aYD4ibD2oHlpgNpm9By7t55CwA/zMMb\nvLFCAmwiLFLN4hE5T8XbB2vkKmch7lX4aSF0ss9R8dZis9NgzxPnX5ruXqaa2VAq\nw326RmeQFfvFRm8QlntO3B4oaYeCMpkPFzza0XkCgYAQGNCTZzYITZm/6y8yOQ3y\nD9W8dsICgMu4OGYoCvniEen2L8OfXp2ClcGq5w98rnvJllxMkGYpRwes5hc8y9Ay\nmAoCVGXXkfJ1aY3QGSTnTir506fcz0+/CeDK6EZb9P8xowiEJisu30CVXOGas2AX\n1As3QBipCQ4a70CJYZEDrw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "bigqueryservice@disco-ascent-328216.iam.gserviceaccount.com",
+  "client_id": "109317347236811035578",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bigqueryservice%40disco-ascent-328216.iam.gserviceaccount.com"
+}

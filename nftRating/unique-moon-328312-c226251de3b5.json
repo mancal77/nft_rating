@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "unique-moon-328312",
+  "private_key_id": "c226251de3b548b68bd5a5671736506c112f959a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCVREYCWtSTExqe\nDTT3l/tLH0Zf8M7rAIfmJxtRYiKa8VmW0jMZcCXAqel44C/E8EJtMe53sw0Fff5P\nDb8dwDl3jypqqe/z2VhayrrhjjGRV+D0Uv5frsGAvgBvjusrzeFHT2BwgEJapRSs\ni4tTkQlUXLGPb2avvgM/nNt1x5lruQBk43ByIKQEc6THiPMvlxOvADdgwC/cNg9p\nxC1QfFz1NdOS4Hx5UdMKNS/jW4RWenjThmsHeGzxaCPX/hq6cnF4o9soIs6nZyno\n40FJC58bgZ5i5rgahtiR1Aq1eI9o/Xg1DtQCiCjDUQzjEADLLFKC/9S1vmF5f6r3\n4H7ku6I3AgMBAAECggEAGPU3d4FUddsF4lN2/cctv1vVWolbL7QBBRyY1ry/6IRe\nZHd1D9XOmi5O2WUy140MrlFg/Ca2EKsGcJVt1T2k3jbT8s3DT1SSD2xCXyB1bUXy\nWSffXIRN2obqb7zH2aUs+81r5KOtdJaRpGAYxbpEgxSUo9UOqGfvBx3lHAZpwrcE\nt0NhijGoBzYW1NNplodY8jZtorgXPlU3OzR50QFk6wAPDGF8kqJbO4NDu/qUCf6s\nFKfPB3mjsIo4tKYcPO9ySYFY3oK9YA7ifQHoqfJx8qwv1buHpyzkUBLhTfCj3obl\nUtzngGFRs83eT86H/Zp+nFYwkJR/ZmDhrmsbspETMQKBgQDQSQ/ZoyDs06RDLrn4\nFuAKvVdhwv+nVeKBgxjp7zS1IabehayUWiSYTTqSq05XAJeVhGOBGLZl9MGJ0+3P\ngNOyRnJjwQS2qZz8VN/eV4zCtk9PhvozVtSbhSY8oFZFN9cPXLW0S+i8NUQ406Dw\npCzzRe8gxxuSMLN+k79Vx4AAxQKBgQC3dgxLCE0VyURsalv72HKku0mdYXAfVuQU\n1Ggk1a/94e0yt3+rqIXqGIvNgJs3mfJCIKYTNN/zN/IIE7JzneWZL/WCzobN9k7Q\ndcYLtpj7ZNHPubCuAU/xhW6mHU/Zm2HYhVCEp1MrNWzL5CXZ/wmNhb+1mKOmtSTC\nq+EBi/NOywKBgQDPTNhcqRJdA2vKfdgTxlin97jfkR+3oTA17I/ATRatbFfTw0F3\nyZwAhWTVk2/+AZXc9w298CWhpg92KRrYWoTYO2sgQ3x4fKnFLog9l+9938tiAJpG\nvJYQT142GvKiI6iFHqWuU5rIr08+K8tTlmMyoRkWC3UydAxB37UgH9YTbQKBgA98\na3U58ifQoXH1WGZd0u+Mz531R52dnAsWEuRpFT39ACSz0JcQ1pz4DXT/UhrTZ9ul\nHd+pKu5A3rFH2FxiC6tunO65uC9ShzyZdGows6Ek1YEPT5agjbr5ZGmpN8BKmWvJ\ndQ59gUu4asKbM4a/PHMxwwj1JXtA9yVnlMqooZUZAoGAKVAJ6/aaceSyV96PHqr1\nDuijEl2SYgl0gGjEf/NjOyBQyKVOAntsM9IbV5pEPUR38P4QflluZ/gIegEXn/eU\ncuTmRY+r1SOpOCkRaJF0vJTH7wV5rw9IONGLyR8Oft1yws84t5inIWRvleeDGCyJ\nONrN0RUe40vmzgrdy3Y5B+c=\n-----END PRIVATE KEY-----\n",
+  "client_email": "nft-470@unique-moon-328312.iam.gserviceaccount.com",
+  "client_id": "106503181904899810950",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nft-470%40unique-moon-328312.iam.gserviceaccount.com"
+}

@@ -1,9 +1,16 @@
+import os
 from google.cloud.exceptions import NotFound
 from google.cloud import bigquery
 
+# Bigquery - client configuration
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+account_key_file_path = os.path.join(ROOT_DIR, 'unique-moon-328312-c226251de3b5.json')
+# account_key_file_path = os.path.join(ROOT_DIR, 'disco-ascent-328216-c0abd7710691.json')
+client = bigquery.Client.from_service_account_json(account_key_file_path)
+client.project = 'unique-moon-328312'
+# client.project = 'disco-ascent-328216'
 
-client = bigquery.Client()
-client.project = 'disco-ascent-328216'
+# Bigquery - dataset and tables IDs definition
 dataset_id = "{}.nft_rating".format(client.project)
 raw_data_table_id = '{}.nft_raw_data'.format(dataset_id)
 twitter_users_data_table_id = '{}.twitter_users_data'.format(dataset_id)
