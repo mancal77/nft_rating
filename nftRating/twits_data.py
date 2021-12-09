@@ -3,6 +3,7 @@ from twython import Twython
 from sentiment import *
 from time import strftime, strptime
 
+
 # Twitter developer API credentials
 t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
             app_secret='yDjfZ39VLTjWrOVmrbZcu0N5L85vzOZPg6fuyJbMnctfKF997V',

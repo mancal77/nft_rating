@@ -1,8 +1,8 @@
 from time import strftime, strptime
-
 from bigQuery import *
 from twython import Twython
 from sentiment import *
+
 
 # Twitter developer API credentials
 t = Twython(app_key='CV0IDw8fZ9k0jRKmzfEbKoESS',
