@@ -1,7 +1,7 @@
 from pyspark.sql.functions import col, datediff, current_date
 from pyspark.sql import SparkSession, functions
 
-from KafkaProducer import send_to_kafka
+# from KafkaProducer import send_to_kafka
 from bigQuery import *
 from calcRating import calculate_rating
 
@@ -56,4 +56,5 @@ for row in raw_data.collect():
     total_tweets = twits_data.where(col('uuid') == row['uuid']).agg(functions.count(col('uuid'))).collect()[0]['count(uuid)']
     total_tweets_7days = twits_data.where((col('uuid') == row['uuid']) & ((datediff(current_date(), col("twit_creation_date"))) < 7)).count()
     rating = calculate_rating(twitter_reg_date, followers, statuses_since_reg, avg_twits_sentiment, total_tweets, total_tweets_7days)
-    send_to_kafka(row['uuid'], row['item_name'], row['twitter'], row['url'], rating)
+    # send_to_kafka(row['uuid'], row['item_name'], row['twitter'], row['url'], rating)
+    print(row['uuid'], row['item_name'], row['twitter'], row['project_url'], rating)
