@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export GOOGLE_APPLICATION_CREDENTIALS=/fullpath/serviceaccount.json
+#export GOOGLE_APPLICATION_CREDENTIALS=/fullpath/serviceaccount.json
 pip install google-cloud
 pip install --upgrade google-api-python-client
 pip install beautifulsoup4
